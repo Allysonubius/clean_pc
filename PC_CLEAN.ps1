@@ -1,11 +1,11 @@
 ﻿
 	$objShell = New-Object -ComObject Shell.Application
 	$objFolder = $objShell.Namespace(0xA)
-	$WinTemp = "c:\Windows\Temp\*"
+	Write-Output $WinTemp = "c:\Windows\Temp\*"
 	
 #1#	Empty Recycle Bin #
 	write-Host "Emptying Recycle Bin." -ForegroundColor Cyan 
-	$objFolder.items() | %{ remove-item $_.path -Recurse -Confirm:$false}
+	$objFolder.items() | ForEach-Object{ remove-item $_.path -Recurse -Confirm:$false}
 	
 #2# Remove Temp
 	write-Host "Removing Temp" -ForegroundColor Green
@@ -26,7 +26,7 @@
 	cleanmgr /sagerun:1 | out-Null 
 	
 	$([char]7)
-	Sleep 3
+	Start-Sleep 3
 	write-Host "I finished the cleanup task,Bye Bye " -ForegroundColor Yellow 
-	Sleep 3
+	Start-Sleep 3
 ##### End of the Script ##### 
